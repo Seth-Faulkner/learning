@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customer Twitter Search</title>
+</head>
+<body>
+	<h1>Customer Twitter Search</h1>
+
+	<form method="get">
+		Search: <input type="text" name="search" value="<%= params[:search] %>"/>
+		<input type="submit" name="submit" value="submit" />
+	</form>
+
+	<% unless @tweets.nil? %>
+		<% if @tweets.length == 0 %>
+			<p>No search results found!</p>
+		<% else %>
+			<br />
+			<table border="1">
+				<tr>
+					<th>ID</th>
+					<th>User</th>
+					<th>Text</th>
+				</tr>
+				<% @tweets.each do |tweet| %>
+					<tr>
+						<td>
+							<a href="<%= tweet.user.uri %>">
+								<%= tweet.id%>
+							</a>
+						</td>
+						<td>
+							<a href="<%= tweet.user.uri %>">
+							<%= tweet.user.screen_name %>
+							</a>
+						</td>
+						<td>
+							<%= tweet.text %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
+		<% end %>
+	<% end %>
+</body>
+</html>
